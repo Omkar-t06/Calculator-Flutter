@@ -59,23 +59,28 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                   )
               ]),
             )),
-            const Divider(height: 0, thickness: 1),
+            const Padding(
+              padding: EdgeInsets.only(right: 8.0, left: 8.0),
+              child: Divider(height: 0, thickness: 2),
+            ),
             //Button Grid
             Expanded(
                 flex: 2,
-                child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 4),
-                    itemCount: Btn.buttonValues.length,
-                    itemBuilder: (context, index) {
-                      return CalcButton(
-                          buttonValue: Btn.buttonValues[index],
-                          buttonColor: getBtnColor(Btn.buttonValues[index]),
-                          textColor: Colors.white,
-                          buttontap: () =>
-                              onButtonTap(Btn.buttonValues[index]));
-                    }))
+                child: Container(
+                  color: Colors.black87,
+                  child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 4),
+                      itemCount: Btn.buttonValues.length,
+                      itemBuilder: (context, index) {
+                        return CalcButton(
+                            buttonValue: Btn.buttonValues[index],
+                            textColor: getBtnColor(Btn.buttonValues[index]),
+                            buttontap: () =>
+                                onButtonTap(Btn.buttonValues[index]));
+                      }),
+                ))
           ],
         ),
       ),
@@ -91,6 +96,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       });
     } else if (value == Btn.del) {
       setState(() {
+        isCalculated = false;
         if (userInput.isEmpty) {
           // Reset both userInput and outputExp to "0" if userInput is empty
           userInput = "0";
@@ -141,17 +147,17 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   Color getBtnColor(String value) {
-    return [Btn.del, Btn.clr].contains(value)
-        ? Colors.blueGrey
-        : [
-            Btn.per,
-            Btn.multiply,
-            Btn.add,
-            Btn.subtract,
-            Btn.divide,
-            Btn.calculate,
-          ].contains(value)
-            ? Colors.orange
-            : Colors.black87;
+    return [
+      Btn.del,
+      Btn.clr,
+      Btn.per,
+      Btn.multiply,
+      Btn.add,
+      Btn.subtract,
+      Btn.divide,
+      Btn.calculate,
+    ].contains(value)
+        ? Colors.deepOrange
+        : Colors.white;
   }
 }
