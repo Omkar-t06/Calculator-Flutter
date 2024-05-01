@@ -11,7 +11,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -76,7 +75,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       itemBuilder: (context, index) {
                         return CalcButton(
                             buttonValue: Btn.buttonValues[index],
-                            textColor: getBtnColor(Btn.buttonValues[index]),
+                            btnColor: getBtnColor(Btn.buttonValues[index]),
                             buttontap: () =>
                                 onButtonTap(Btn.buttonValues[index]));
                       }),
@@ -116,6 +115,19 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       setState(() {
         evalExp();
       });
+    } else if (value == Btn.per) {
+      try {
+        double percent = double.parse(userInput) / 100;
+        setState(() {
+          userInput = percent.toString();
+          outputExp = userInput;
+        });
+      } catch (e) {
+        setState(() {
+          outputExp = "Invalid Expression";
+        });
+      }
+    } else if (value == Btn.unfold) {
     } else {
       setState(() {
         if (userInput == "0") {
@@ -156,6 +168,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       Btn.subtract,
       Btn.divide,
       Btn.calculate,
+      Btn.unfold,
     ].contains(value)
         ? Colors.deepOrange
         : Colors.white;

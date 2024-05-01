@@ -1,7 +1,6 @@
 class Btn {
-  static const String ans = "Ans";
   static const String clr = "C";
-  static const String del = "Del";
+  static const String del = "discard";
   static const String per = "%";
   static const String multiply = "×";
   static const String divide = "÷";
@@ -9,6 +8,7 @@ class Btn {
   static const String subtract = "-";
   static const String calculate = "=";
   static const String dot = ".";
+  static const String unfold = "unfold_more";
 
   static const String n0 = "0";
   static const String n1 = "1";
@@ -38,9 +38,9 @@ class Btn {
     n2,
     n3,
     add,
+    unfold,
     n0,
     dot,
-    ans,
     calculate,
   ];
 }
